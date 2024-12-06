@@ -56,7 +56,7 @@ Ce projet répond aux exigences du test technique visant à démontrer l'autonom
 - **Installer Docker** : [Lien vers Docker](https://www.docker.com/).
 - **Cloner le dépôt Git** :
 ```bash
-  git clone <url-du-depot>
+  git clone https://github.com/Aking221/Etayage-project
 ```
 
 ---
