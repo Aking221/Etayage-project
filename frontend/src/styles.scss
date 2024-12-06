@@ -1,59 +1,78 @@
+/* Variables */
+$primary-color: #ff4c4c;
+$secondary-color: #1e1e1e;
+$background-color: #121212;
+$text-color: #f9f9f9;
+$font-family: 'Arial', sans-serif;
+$border-radius: 8px;
+$box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+
+/* Mixins */
+@mixin box-shadow-hover {
+  transition: transform 0.2s, box-shadow 0.2s;
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba($primary-color, 0.5);
+  }
+}
+
+@mixin button-styles {
+  padding: 12px 16px;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: bold;
+  outline: none;
+  transition: background-color 0.3s, transform 0.2s;
+}
+
 /* Global Styles */
 body {
-  font-family: 'Arial', sans-serif;
+  font-family: $font-family;
   margin: 0;
   padding: 0;
   line-height: 1.6;
-  color: #f9f9f9;
-  background-color: #121212; /* Dark background */
+  color: $text-color;
+  background-color: $background-color;
 }
 
 h1, h2, h3 {
   text-align: center;
   margin: 10px 0;
-  color: #ff4c4c; /* Red accents for headings */
+  color: $primary-color;
 }
 
 /* Header Styles */
 header {
-  background-color: #ff4c4c; /* Red background */
-  color: black; /* Black text for contrast */
+  background-color: $primary-color;
+  color: black;
   padding: 10px 20px;
   text-align: center;
   position: sticky;
   top: 0;
   z-index: 1000;
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
+  @include box-shadow-hover;
 }
 
 header a {
-  color: black; /* Black text for links */
+  color: black;
   margin: 0 15px;
   text-decoration: none;
   font-weight: bold;
   transition: color 0.3s;
-}
-
-header a:hover {
-  color: #f0f0f0;
-  text-decoration: underline;
+  &:hover {
+    color: $text-color;
+    text-decoration: underline;
+  }
 }
 
 /* Footer Styles */
 footer {
-  background-color: #1e1e1e; /* Slightly lighter dark background */
-  color: #ff4c4c; /* Red text for footer */
+  background-color: $secondary-color;
+  color: $primary-color;
   text-align: center;
   padding: 15px 0;
   font-size: 14px;
-  border-top: 1px solid #444;
-}
-
-/* Container Styles */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 20px;
+  border-top: 1px solid lighten($secondary-color, 20%);
 }
 
 /* Card Styles */
@@ -61,52 +80,83 @@ footer {
   max-width: 900px;
   margin: 20px auto;
   padding: 20px;
-  background: #1e1e1e; /* Dark card background */
-  border-radius: 8px;
+  background: $secondary-color;
+  border-radius: $border-radius;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  @include box-shadow-hover;
 }
 
-.card:hover {
-  box-shadow: 0 4px 12px rgba(255, 76, 76, 0.6); /* Red shadow effect */
+/* Home Page Styles */
+.home-container {
+  margin: 0 auto;
+  max-width: 1200px;
+  text-align: center;
+  padding: 40px 20px;
 }
 
-/* Bus Info Styles */
-.bus-container,
-.parking-container {
-  max-width: 900px;
-  margin: 20px auto;
+.home-container h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.home-container p {
+  font-size: 1.2rem;
+  line-height: 1.8;
+  margin-bottom: 40px;
+  color: lighten($text-color, 10%);
+}
+
+.features {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+}
+
+.feature-card {
+  background: $secondary-color;
+  border-radius: $border-radius;
+  box-shadow: $box-shadow;
+  text-align: center;
   padding: 20px;
-  background: #1e1e1e;
-  border-radius: 8px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.5);
+  @include box-shadow-hover;
 }
 
-.bus-list,
-.parking-list {
+.feature-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: $border-radius;
+  margin-bottom: 15px;
+}
+
+.feature-card h3 {
+  margin-top: 10px;
+  font-size: 1.5rem;
+  color: $primary-color;
+}
+
+.feature-card p {
+  font-size: 1rem;
+  color: lighten($text-color, 15%);
+  margin-top: 10px;
+}
+
+/* Bus and Parking Info Styles */
+.bus-container, .parking-container {
+  @extend .card;
+}
+
+.bus-list, .parking-list {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
   gap: 20px;
 }
 
-.bus-card,
-.parking-card {
+.bus-card, .parking-card {
   padding: 15px;
-  border: 1px solid #333;
-  border-radius: 8px;
-  background-color: #121212;
-  transition: transform 0.2s, box-shadow 0.2s;
-  color: #f9f9f9;
-}
-
-.bus-card:hover,
-.parking-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 4px 10px rgba(255, 76, 76, 0.5); /* Red shadow */
-}
-
-.bus-card p,
-.parking-card p {
-  margin: 8px 0;
+  border: 1px solid darken($secondary-color, 10%);
+  background-color: $background-color;
+  @include box-shadow-hover;
 }
 
 /* Form Styles */
@@ -116,61 +166,45 @@ footer {
   margin-bottom: 20px;
 }
 
-.trip-form select,
-button {
-  padding: 12px 16px;
-  border-radius: 4px;
-  border: 1px solid #444;
-  background-color: #1e1e1e;
-  color: #ff4c4c;
-  font-size: 16px;
-  outline: none;
+.trip-form select, button {
+  @include button-styles;
+  border: 1px solid darken($secondary-color, 20%);
+  background-color: $secondary-color;
+  color: $primary-color;
 }
 
 button {
-  background-color: #ff4c4c;
+  background-color: $primary-color;
   color: black;
-  font-weight: bold;
   cursor: pointer;
-  transition: background-color 0.3s, transform 0.2s;
-}
-
-button:hover {
-  background-color: #e63b3b;
-  transform: scale(1.05);
-}
-
-button:disabled {
-  background-color: #444;
-  cursor: not-allowed;
-  color: #999;
+  &:hover {
+    background-color: lighten($primary-color, 10%);
+    transform: scale(1.05);
+  }
+  &:disabled {
+    background-color: $secondary-color;
+    cursor: not-allowed;
+    color: #999;
+  }
 }
 
 /* Map Styles */
 .map {
   height: 400px;
   width: 100%;
-  border: 1px solid #333;
+  border: 1px solid darken($secondary-color, 10%);
   margin-top: 20px;
-  border-radius: 8px;
-  overflow: hidden;
+  border-radius: $border-radius;
 }
 
-.map-container {
-  max-width: 900px;
-  margin: 0 auto;
-  border-radius: 8px;
-  overflow: hidden;
-}
-
-/* Utility Styles */
+/* Utility Classes */
 .text-center {
   text-align: center;
 }
 
 .text-bold {
   font-weight: bold;
-  color: #ff4c4c;
+  color: $primary-color;
 }
 
 .text-muted {
@@ -178,15 +212,14 @@ button:disabled {
 }
 
 .error {
-  color: #ff4c4c;
+  color: $primary-color;
   text-align: center;
   margin-top: 10px;
 }
 
 /* Responsiveness */
 @media (max-width: 768px) {
-  .bus-list,
-  .parking-list {
+  .bus-list, .parking-list, .features {
     grid-template-columns: 1fr;
   }
 
