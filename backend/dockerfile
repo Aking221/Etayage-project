@@ -1,18 +1,26 @@
-# Backend Dockerfile
+# Use the official Node.js 20 image
 FROM node:20
 
 # Set working directory
 WORKDIR /app
 
-# Copy package files and install dependencies
+# Copy package.json and package-lock.json
 COPY package*.json ./
-RUN npm install && npm install -g nodemon
 
-# Copy the source code
+# Manually install each backend dependency
+RUN npm install express@4.21.1
+RUN npm install cors@2.8.5
+RUN npm install dotenv@16.4.7
+RUN npm install node-fetch@3.3.2
+
+# Install devDependencies manually
+RUN npm install nodemon@3.1.7 --save-dev
+
+# Copy application source code
 COPY . .
 
-# Expose the backend port
+# Expose the port for the backend
 EXPOSE 3001
 
-# Start the backend
-CMD ["nodemon", "src/server.js"]
+# Use nodemon to start the server in development mode
+CMD ["npm", "run", "dev"]

@@ -1,18 +1,36 @@
-# Frontend Dockerfile
+# Use a lightweight Node.js image
 FROM node:18-alpine
 
-# Set the working directory
+# Set working directory
 WORKDIR /app
 
-# Copy package files and install dependencies
+# Copy package.json and package-lock.json
 COPY package*.json ./
-RUN npm install
 
-# Copy the source code
+# Manually install each frontend dependency
+RUN npm install react@18.3.1
+RUN npm install react-dom@18.3.1
+RUN npm install react-scripts@5.0.1
+RUN npm install react-router-dom@7.0.2
+RUN npm install axios@1.7.9
+RUN npm install bootstrap@5.3.3
+RUN npm install react-icons@5.4.0
+RUN npm install react-leaflet@4.2.1
+RUN npm install leaflet@1.9.4
+RUN npm install web-vitals@2.1.4
+RUN npm install framer-motion@11.13.1
+RUN npm install @testing-library/react@13.4.0
+RUN npm install @testing-library/jest-dom@5.17.0
+RUN npm install @testing-library/user-event@13.5.0
+
+# Install devDependencies manually
+RUN npm install sass@1.82.0 --save-dev
+
+# Copy application source code
 COPY . .
 
-# Expose the port your frontend will run on
+# Expose the port for the frontend
 EXPOSE 3000
 
-# Start the server
+# Start the frontend server
 CMD ["npm", "start"]
