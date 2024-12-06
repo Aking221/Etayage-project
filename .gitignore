@@ -1,0 +1,35 @@
+# Node.js dependencies
+node_modules/
+
+# Logs
+logs/
+*.log
+
+# Build files
+build/
+dist/
+
+# Cache and temporary files
+.cache/
+*.tmp
+
+# React-specific
+coverage/
+*.cache/
+
+# SASS cache
+*.sass-cache/
+
+# IDE-specific files
+.idea/
+.vscode/
+*.swp
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Others
+*.iml
+*.pid
+*.pid.lock

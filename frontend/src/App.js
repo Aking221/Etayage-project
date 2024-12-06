@@ -1,27 +1,29 @@
-import React, { useEffect, useState } from 'react';
+import React from "react";
+import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
+import Header from "./components/Header";
+import Footer from "./components/Footer";
+import Home from "./components/Home";
+import Buses from "./components/BusInfo";
+import Parking from "./components/ParkingInfo";
+import Trip from "./components/Trip";
+import './styles.scss';
 
-function App() {
-    const [circulationData, setCirculationData] = useState([]);
 
-    useEffect(() => {
-        fetch('http://localhost:3001/api/circulation')
-            .then((response) => response.json())
-            .then((data) => setCirculationData(data.results))
-            .catch((error) => console.error('Error fetching data:', error));
-    }, []);
-
-    return (
-        <div>
-            <h1>Circulation Data</h1>
-            <ul>
-                {circulationData.map((item, index) => (
-                    <li key={index}>
-                        {item.nom_itin} - {item.libelle_court}
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
-}
+const App = () => {
+  return (
+    <Router>
+      <Header />
+      <main>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/buses" element={<Buses />} />
+          <Route path="/parking" element={<Parking />} />
+          <Route path="/trip" element={<Trip />} />
+        </Routes>
+      </main>
+      <Footer />
+    </Router>
+  );
+};
 
 export default App;
