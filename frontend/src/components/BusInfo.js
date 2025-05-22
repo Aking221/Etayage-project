@@ -75,3 +75,5 @@ const BusInfo = () => {
     </div>
   );
 };
+
+export default BusInfo
